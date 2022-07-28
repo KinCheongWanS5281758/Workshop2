@@ -1,16 +1,19 @@
-# This is a sample Python script.
+#!/usr/bin/python3
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import sys
+import string
 
+words = sys.stdin.read().split()
+d = dict()
+for word in words:
+    t = word.translate(str.maketrans('', '', string.punctuation)).upper()
+    if (len(t) > 0):
+        d[t] = d.get(t, 0) + 1
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+l = list()
+for key, value in d.items():
+    l.append((value, key))
 
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+l = sorted(l, reverse=True)
+for v, k in l:
+    print(k, v)
